@@ -20,7 +20,7 @@ Before you start, make sure you have the following installed:
 Clone the project to download its contents:
 
 ```bash
-git clone https://github.com/your-username/your-repository-name.git
+git clone  https://github.com/rose-me/symfony7-crud.git
 cd your-repository-name
 ```
 
@@ -53,7 +53,46 @@ php bin/console doctrine:migrations:migrate
 
 ```
 
-### 5. Run the Symfony Local Server
+### 5. Run the Frontend dependencies
+
+If your project uses frontend assets (JavaScript, CSS, etc.), you'll need to install the dependencies listed in package.json. First, make sure you install `Node.js`:
+
+Using npm:
+```bash
+npm install
+```
+
+Using Yarn:
+```bash
+yarn install
+```
+
+### 6. Run Scripts to build the Frontend assests
+
+_Development Build_:
+
+Using npm: 
+```bash
+npm run dev
+```
+
+Using Yarn:
+```bash
+yarn dev
+```
+_Production Build_:
+
+Using npm: 
+```bash
+npm run build
+```
+
+Using Yarn:
+```bash
+yarn build
+```
+
+### 7. Run the Symfony Local Server
 
 Start the Symfony local web server:
 
@@ -67,6 +106,6 @@ Alternatively, you can use PHP's built-in server:
 php -S localhost:8000 -t public
 ```
 
-### 6. Access the Application
+### 8. Access the Application
 
 Open your web browser and go to `http://localhost:8000` to view the application.
