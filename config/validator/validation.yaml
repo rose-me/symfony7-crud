@@ -1,0 +1,30 @@
+App\Entity\Product:
+    properties:
+        name:
+            - NotBlank:
+                message: "Name should not be blank."
+            - Length:
+                max: 255
+                maxMessage: "Name cannot be longer than {{ limit }} characters"
+        
+        description:
+            - NotBlank:
+                message: "Description should not be blank."
+            - Length:
+                max: 500
+                maxMessage: "Description cannot be longer than {{ limit }} characters"
+
+        price:
+            - NotBlank:
+                message: "Price should not be blank."             
+            - PositiveOrZero:
+                message: "Price must be a positive number or zero."
+            # - Regex:
+            #     pattern: /^\d+(\.\d{1,2})?$/
+            #     message: "The price must be a valid number with up to 2 decimal places."
+
+        stockQuantity:
+            - NotBlank:
+                message: "Stock Quantity should not be blank."            
+            - PositiveOrZero:
+                message: "Stock Quantity must be a positive number or zero."

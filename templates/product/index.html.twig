@@ -1,0 +1,81 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Product index{% endblock %}
+{% block page_title %}Products{% endblock %}
+{% block page_subtitle %}All Products{% endblock %}
+{% block page_actions %}
+    <div class="d-inline-flex gap-2 page-actions">
+        <a class="btn btn-sm" href="{{ path('product_new') }}">
+            <i class="ti-plus me-1"></i>Create
+        </a>
+        <a class="btn btn-sm" href="{{ path('product_import') }}">
+            <i class="ti-import me-1"></i>Import CSV
+        </a>
+        <a class="btn btn-sm" href="{{ path('product_export', app.request.query.all) }}">
+            <i class="ti-export me-1"></i>Export CSV
+        </a>
+    </div>
+{% endblock %}
+
+{% block body %}
+    {{ include('product/_search_form.html.twig') }}
+
+    {# table & pagination #}
+    <div class="row m-t-20">
+        <div id="area" class="col-12">
+            <div class="row">
+                <div class="col-12 mypj-content-databox">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Id</th>                                
+                                    <th>{{ knp_pagination_sortable(pagination, 'Name', 'p.name') }}</th>
+                                    <th>Description</th>
+                                    <th class="price-column">{{ knp_pagination_sortable(pagination, 'Price', 'p.price') }}</th>
+                                    <th class="stock-column">{{ knp_pagination_sortable(pagination, 'Stock Quantity', 'p.stockQuantity') }}</th>
+                                    <th>{{ knp_pagination_sortable(pagination, 'Created Datetime', 'p.createdDatetime') }}</th>                                
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody class="table-group-divider">
+                            {% for product in pagination %}
+                                <tr>
+                                    <td>{{ product.id }}</td>
+                                    <td class="text-break truncate-text">{{ product.name }}</td>
+                                    <td class="text-break truncate-text">{{ product.description }}</td>
+                                    <td class="text-end price-column">{{ product.price }}</td>
+                                    <td class="text-end stock-column">{{ product.stockQuantity }}</td>
+                                    <td>{{ product.createdDatetime ? product.createdDatetime|date('Y-m-d H:i:s', 'Asia/Singapore') : '' }}</td>                                
+                                    <td class="table-action">
+                                        <a class="action-icon" href="{{ path('product_edit', {'id': product.id}) }}"><i class="ti-pencil"></i></a>                                        
+                                        <span {{ stimulus_controller('modal-form') }}>
+                                            <a data-action="modal-form#openModal" class="action-icon" href="javascript: void(0);"><i class="ti-trash"></i></a>
+                                            {{ include('_modal.html.twig', {
+                                                modalTitle: 'Confirmation!',
+                                                modalContent: 'Are you sure you want to delete this item?',
+                                                isDeleteForm: true,
+                                                id: product.id,
+                                                routeName: 'product_delete',
+                                            }) }}
+                                        </span>
+                                    </td>
+                                </tr>                            
+                            {% else %}
+                                <tr>
+                                    <td colspan="7">no records found</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>                    
+
+                    <div class="">
+                        {{ knp_pagination_render(pagination) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>        
+        
+{% endblock %}

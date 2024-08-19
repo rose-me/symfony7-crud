@@ -1,0 +1,16 @@
+{{ form_start(form) }}
+    {{ form_widget(form) }}
+    <div class="row">
+        <h5 class="w-100 text-center mt-5">
+            {% if showResetButton is defined and showResetButton|default(false) %}
+                <a class="btn bg-c-yellow" href="{{ path('product_index') }}">
+                    <i class="ti-reload me-1"></i>Reset
+                </a>
+            {% endif %}
+
+            <button class="btn bg-m-dblue m-white" type="submit" id="submitBtn" name="submit">
+                <i class="me-1 {{ button_icon|default('ti-check') }}"></i>{{ button_label|default('Save') }}
+            </button>
+        </h5>
+    </div>
+{{ form_end(form) }}

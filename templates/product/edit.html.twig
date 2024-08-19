@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Product{% endblock %}
+{% block page_title %}Products{% endblock %}
+{% block page_subtitle %}Edit Product{% endblock %}
+{% block page_actions %}
+    <div class="d-inline-flex gap-2 page-actions">
+        <a class="btn btn-sm" href="{{ path('product_index') }}">
+            <i class="ti-arrow-left me-1"></i>Back to list
+        </a>        
+    </div>
+{% endblock %}
+
+{% block body %}
+    <div class="row m-t-20">
+        <div class="col-md-12 col-lg-3"></div>
+        <div class="col-md-12 col-lg-6 mypj-content-databox">
+            <h5 class="text-center m-t-10 w-100 mypj-content-dataheading">Edit Product</h5>
+            {{ include('product/_form.html.twig', {'button_label': 'Update'}) }}
+        </div>
+        <div class="col-md-12 col-lg-3"></div>
+    </div>
+{% endblock %}

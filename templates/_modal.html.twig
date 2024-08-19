@@ -1,0 +1,35 @@
+{# Modal #}
+<div class="modal fade" data-modal-form-target="modal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">{{ modalTitle }}</h5>
+            <button data-action="modal-form#closeModal" type="button" class="close btn btn-sm" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true"><i class="ti-close"></i></span>
+            </button>
+        </div>
+        <div class="modal-body" data-modal-form-target="modalBody">
+            {{ modalContent|default('Loading...') }}
+
+            {% if isDeleteForm is defined and true %}
+            <form method="post" action="{{ path(routeName, {'id': id}) }}">
+                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ id) }}">                
+            </form>
+            {% endif %}
+        </div>
+        <div class="modal-footer">
+            <button data-action="modal-form#closeModal" type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="border-radius:25px;">Cancel</button>            
+            
+            {% if isDeleteForm is defined and true %}
+            <button data-action="modal-form#deleteForm" type="button" id="submitBtn" class="btn btn-danger confirm-delete" style="border-radius:25px;">
+                Yes, Delete
+            </button>
+            {% else %}
+            <button data-action="modal-form#submitForm" type="button" id="submitBtn" class="btn btn-danger confirm-submit" style="border-radius:25px;">
+                Submit
+            </button>
+            {% endif %}
+        </div>
+        </div>
+    </div>
+</div>

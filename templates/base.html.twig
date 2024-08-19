@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('app') }}
+            <link href="{{ asset('icon/themify-icons.css') }}" rel="stylesheet">
+        {% endblock %}
+
+        {% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
+        {% endblock %}
+    </head>
+    
+    <body> 
+        <div id="mypj" class="mypj" vertical-nav-type="offcanvas" vertical-effect="overlay" mypj-device-type="mobile">
+            <div class="mypj-overlay-box"></div>
+            <div class="mypj-container">
+                {# header nav here #}
+                {{ include('_header.html.twig') }}
+
+                {# main container here #}
+                <div class="mypj-main-container">
+                    <div class="mypj-wrapper">
+                        
+                        {# sidebar nav here #}                        
+                        {{ include('_sidebar.html.twig') }}
+
+                        {# content here #}
+                        <div class="mypj-content">
+                            <div class="mypj-inner-content">
+                                <div class="main-body">
+                                    <div class="page-wrapper">
+                                        <div class="page-body">
+                                            {# read and display all flash messages #}
+                                            <div id="flash">
+                                                {% set buttonCloseAlert = '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>' %}
+                                                {% for label, flashMessages in app.flashes %}
+                                                    {% for flashMessage in flashMessages %}
+                                                        <div class="alert alert-{{ label }} {{ flashMessage.dismissible is defined ? 'alert-dismissible' : '' }} d-flex align-items-center fade show" role="alert">
+                                                            {% if label == 'success' %}
+                                                                <i class="ti-check me-2"></i>
+                                                            {% elseif label == 'danger' %}
+                                                                <i class="ti-alert me-2"></i>
+                                                            {% else %}
+                                                                <i class="ti-info-alt me-2"></i>                                                        
+                                                            {% endif %}
+                                                            <strong>{{ flashMessage.message|raw }}</strong>
+                                                            {{ flashMessage.showButtonClose ? buttonCloseAlert|raw : '' }}
+                                                        </div>
+
+                                                    {% endfor %}
+                                                {% endfor %}
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-12 mypj-content-titlebox">
+                                                    <strong class="">{% block page_title %}{% endblock %}</strong>
+                                                    <i class="ti-home"></i>
+                                                      - {% block page_subtitle %}{% endblock %}
+                                                    {% block page_actions %}{% endblock %}
+                                                </div>
+                                            </div>                                            
+                                            {% block body %}{% endblock %}
+										</div>                                
+                                    </div>
+                                </div>
+                            </div>                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </body>
+</html>

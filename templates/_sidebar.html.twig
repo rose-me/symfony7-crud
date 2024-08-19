@@ -1,0 +1,45 @@
+<nav class="mypj-navbar">
+    <div class="mypj-inner-navbar main-menu">
+        <div class="mypj-scrollbox">
+            <div class="mypj-scrollbox-container">
+                <div class="mypj-navigation-level">Menu</div>
+                <ul class="nav flex-column">
+                    <li class="nav-item {% if app.request.get('_route') == 'home' %}active{% endif %}">
+                        <a class="nav-link" aria-current="page" href="{{ path('home') }}">
+                            <span class="mypj-icon"><i class="ti-home"></i></span>
+                            <span class="mypj-menutext">Dashboard</span>
+                        </a>
+                    </li>                                            
+                    <li class="nav-item mypj-hasmenu {% if app.request.get('_route') == 'product_index' or app.request.get('_route') == 'product_new' %}active show{% endif %}">
+                        <a id="dropdownMenuButton" class="nav-link dropdown-toggle custom-toggler">
+                            <span class="mypj-icon"><i class="ti-bookmark-alt"></i></span>
+                            <span class="mypj-menutext">Products</span>
+                        </a>                                                
+                        <ul class="mypj-submenu {% if app.request.get('_route') == 'product_index' or app.request.get('_route') == 'product_new' %}show{% endif %}">                                                    
+                            <li class="{% if app.request.get('_route') == 'product_index' %}active{% endif %}"><a class="dropdown-item" href="{{ path('product_index') }}">All Products</a></li>
+                            <li class="{% if app.request.get('_route') == 'product_new' %}active{% endif %}"><a class="dropdown-item" href="{{ path('product_new') }}">New Product</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled" aria-disabled="true">
+                            <span class="mypj-icon"><i class="ti-shopping-cart"></i></span>
+                            <span class="mypj-menutext">Disabled</span>
+                        </a>
+                    </li>                                            
+                    <li class="nav-item">
+                        <a class="nav-link disabled" aria-disabled="true">
+                            <span class="mypj-icon"><i class="ti-files"></i></span>
+                            <span class="mypj-menutext">Disabled</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled" aria-disabled="true">
+                            <span class="mypj-icon"><i class="ti-user"></i></span>
+                            <span class="mypj-menutext">Disabled</span>
+                        </a>
+                    </li                                            
+                </ul>
+            </div>
+        </div>                                
+    </div>
+</nav>
